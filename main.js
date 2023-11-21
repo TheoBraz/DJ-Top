@@ -29,10 +29,20 @@ function draw() {
 	if (scoreLeftWrist > 0.6) {
 		song2.stop();
 		song.play();
+		if (song.isPlaying()) {
+			song.stop();
+		} else {
+			song.play();
+		}
 	}
-	if(scoreRightElbow > 0.7){
+	if (scoreRightElbow > 0.7) {
 		song.stop();
 		song2.play();
+		if (song2.isPlaying()) {
+			song2.stop();
+		} else {
+			song2.play();
+		}
 	}
 	image(video, 0, 0, 600, 500);
 	song.setVolume((narix / 600));
@@ -57,9 +67,5 @@ function gotPoses(results) {
 }
 
 function play() {
-	if (song.isPlaying()) {
-		song.stop();
-	} else {
-		song.play();
-	}
+
 }
