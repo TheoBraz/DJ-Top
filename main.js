@@ -1,10 +1,13 @@
 song = "";
+song2 = "";
 var narix = 0;
 var nazoom = 1;
 var scoreLeftWrist = 0;
+var scoreRightElbow = 0;
 
 function preload() {
 	song = loadSound("Alan Walker - The Spectre.mp3");
+	song2 = loadSound("music.mp3");
 }
 
 function setup() {
@@ -24,7 +27,12 @@ function modelLoaded() {
 
 function draw() {
 	if (scoreLeftWrist > 0.6) {
-		play();
+		song2.stop();
+		song.play();
+	}
+	if(scoreRightElbow > 0.7){
+		song.stop();
+		song2.play();
 	}
 	image(video, 0, 0, 600, 500);
 	song.setVolume((narix / 600));
@@ -36,12 +44,14 @@ function draw() {
 }
 
 function gotPoses(results) {
+	console.log(results);
 	if (results.length > 0) {
 		narix = results[0].pose.nose.x;
 		console.log(narix);
 		nazoom = results[0].pose.nose.y;
 		console.log(nazoom)
 		scoreLeftWrist = results[0].pose.keypoints[9].score;
+		scoreRightElbow = results[0].pose.keypoints[8].score;
 
 	}
 }
